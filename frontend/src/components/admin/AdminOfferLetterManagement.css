@@ -1,0 +1,292 @@
+.admin-offer-letter-management-container {
+    max-width: 1600px; 
+    margin: 5px ;
+    padding: 5px; 
+    background-color: #f8f9fa; 
+    border-radius: 12px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; 
+    color: #343a40; 
+    line-height: 1.6; 
+}
+
+.admin-offer-letter-management-container h2 {
+    color: #212529; 
+    font-size: 2.8em; 
+    font-weight: 700;
+    margin: 0 0 10px 0; 
+}
+
+.section-title {
+    color: #343a40;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.section-subtitle {
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.section-block {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.03);
+    margin-bottom: 10px;
+}
+
+.info-message,
+.error-message {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.info-message {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border: 1px solid #b2ebf2;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+/* Alert messages (for success/error at the top of the page) */
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.alert.success-alert {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert.error-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.close-alert-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.close-alert-button:hover {
+    opacity: 1;
+}
+
+/* Table styles */
+.table-container {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.data-table th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Action buttons */
+.action-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 8px; /* Spacing between buttons */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.action-button:last-child {
+    margin-right: 0;
+}
+
+.generate-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.generate-button:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.download-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Status text for generated offer letters */
+.offer-letter-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.generated-status {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Button group for actions cell */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between items in the group */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Modal styles (from AdminOfferLetterManagement) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-title {
+    margin-top: 0;
+    color: #343a40;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+.modal-close-button:hover {
+    color: #343a40;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .admin-offer-letter-management-container {
+        padding: 15px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .action-button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        margin-bottom: 5px; /* Stack buttons on small screens */
+    }
+
+    .button-group {
+        flex-direction: column; /* Stack vertically on small screens */
+        align-items: flex-start;
+    }
+
+    .offer-letter-status {
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-title {
+        font-size: 1.5rem;
+    }
+}

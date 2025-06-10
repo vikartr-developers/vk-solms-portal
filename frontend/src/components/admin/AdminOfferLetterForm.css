@@ -1,0 +1,202 @@
+.offer-letter-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', sans-serif; /* Consistent with global styles */
+    color: #333;
+}
+
+/* Headings (if any within the form, though usually handled by parent modal) */
+.offer-letter-form-container h3 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* Form Layout for individual fields */
+.offer-letter-form-container form {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 18px; /* Space between form fields */
+}
+
+/* Individual Form Labels and Inputs */
+.offer-letter-form-container label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.offer-letter-form-container input[type="text"],
+.offer-letter-form-container input[type="number"],
+.offer-letter-form-container input[type="date"] {
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px; /* Slightly more rounded */
+    font-size: 1em;
+    color: #333;
+    margin-top: 5px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.offer-letter-form-container input[type="text"]:focus,
+.offer-letter-form-container input[type="number"]:focus,
+.offer-letter-form-container input[type="date"]:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Disabled fields styling */
+.offer-letter-form-container input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+/* Messages */
+.offer-letter-form-container .form-alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.offer-letter-form-container .success-alert {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.offer-letter-form-container .error-alert {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Buttons */
+.offer-letter-form-container .form-actions {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 15px; /* Space between buttons */
+    margin-top: 30px;
+}
+
+.offer-letter-form-container .form-button {
+    padding: 18px 30px; /* Increased padding for larger size */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3em; /* Increased font size */
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 150px; /* Ensure buttons have a larger minimum width */
+    text-align: center;
+    background-color: #6c757d; /* A neutral default, will be overridden by type="submit" */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* General transition */
+}
+
+/* Specific styling for the submit button (Generate) */
+.offer-letter-form-container .form-button[type="submit"] {
+    background-color: #28a745; /* Green for generate - overrides the default */
+}
+
+.offer-letter-form-container .form-button[type="submit"]:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-2px) scale(1.02); /* Lift and slightly scale on hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
+}
+
+.offer-letter-form-container .form-button[type="submit"]:active {
+    transform: translateY(0); /* Reset on click */
+    box-shadow: none; /* Remove shadow on click */
+}
+
+.offer-letter-form-container .form-button[type="submit"]:disabled {
+    background-color: #a0d9b4; /* Lighter green when disabled */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none; /* Ensure no transformations when disabled */
+}
+
+/* Specific styling for the cancel button */
+.offer-letter-form-container .cancel-button { /* A specific class for cancel button, if needed */
+    background-color: #6c757d;
+    color: white;
+}
+
+.offer-letter-form-container .cancel-button:hover:not(:disabled) {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Spinner for loading state (if implemented inside button) */
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block; /* Make spinner behave like text */
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .offer-letter-form-container {
+        padding: 15px;
+    }
+
+    .offer-letter-form-container form {
+        gap: 15px;
+    }
+
+    .offer-letter-form-container .form-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .offer-letter-form-container .form-button {
+        width: 100%; /* Full width on small screens */
+        margin-top: 5px; /* Adjust margin for vertical stack */
+    }
+}
+
+/* Specific styling for the back button in modal */
+.modal-overlay .modal-content .modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-overlay .modal-content .modal-close-button:hover {
+    color: #333;
+}

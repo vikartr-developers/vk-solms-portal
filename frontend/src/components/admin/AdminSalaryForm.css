@@ -1,0 +1,243 @@
+.admin-salary-form-container {
+  max-width: 1450px; /* Adjust max-width as needed */
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.back-to-dashboard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 1.1em;
+  font-weight: 1000;
+  color: #6a1b9a; /* Deep purple */
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-to-dashboard:hover {
+  color: #8e24aa; /* Lighter purple on hover */
+  transform: translateX(-5px);
+}
+
+.salary-form-header {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.success-message {
+  background-color: #e6ffed;
+  color: #1a7d3c;
+  border: 1px solid #b2eec7;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #ffe6e6;
+  color: #cc0000;
+  border: 1px solid #ffb2b2;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.salary-form .form-section {
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.salary-form .form-section h3 {
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* New: For placing month/year selectors at the very top and inline */
+.salary-period-top {
+  display: flex;
+  justify-content: center; /* Center the month and year selectors */
+  gap: 30px; /* Space between month and year */
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  background-color: #e8f0fe; /* Light blue background for emphasis */
+  border-radius: 8px;
+  border: 1px solid #c2dcfc;
+}
+
+.salary-period-top .form-group {
+  margin-bottom: 0; /* Remove bottom margin for inline groups */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.salary-period-top label {
+  font-weight: bold;
+  color: #0056b3;
+  white-space: nowrap; /* Prevent label from wrapping */
+}
+
+.salary-period-top select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1em;
+  min-width: 120px; /* Ensure consistent width */
+}
+
+
+/* --- Grid-like layout for form rows --- */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3-4 fields per row responsive */
+  gap: 20px; /* Gap between grid items */
+  margin-bottom: 10px; /* Space between rows */
+}
+
+.form-group {
+  margin-bottom: 0; /* Managed by row gap */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1; /* Make this field span all columns */
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box; /* Include padding in element's total width and height */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #6a1b9a;
+  box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+  outline: none;
+}
+
+/* Salary Summary Styling */
+.salary-summary {
+  background-color: #f0f8ff; /* Light blue background */
+  border: 1px solid #d4e7fe;
+  padding: 25px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.salary-summary .summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.salary-summary .summary-item:last-child {
+  border-bottom: none;
+}
+
+.salary-summary .summary-item strong {
+  color: #333;
+  font-size: 1.1em;
+}
+
+.salary-summary .summary-item span {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.salary-summary .net-salary {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #28a745; /* Green for net salary */
+  padding-top: 15px;
+  border-top: 2px solid #b2eec7;
+  margin-top: 10px;
+}
+
+.submit-button {
+  display: block; /* Ensures the element is a block-level element, which is necessary for auto margins to work */
+  width: 12%;
+  padding: 15px;
+  margin-top: 30px;
+  margin-left: auto; /* Centers the button horizontally */
+  margin-right: auto; /* Centers the button horizontally */
+  background-color: #6a1b9a; /* Deep purple */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+
+.submit-button:hover:not(:disabled) {
+  background-color: #8e24aa; /* Lighter purple on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr; /* Stack fields on smaller screens */
+  }
+
+  .salary-period-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .admin-salary-form-container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .salary-form-header {
+    font-size: 1.6em;
+  }
+}

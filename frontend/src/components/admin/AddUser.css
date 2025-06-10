@@ -1,0 +1,182 @@
+.form-section {
+    max-width: 1300px;
+    margin: 10px auto;
+    padding: 10px 20px; 
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.form-section h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2em;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+}
+
+.form-section h3 {
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    position: relative;
+    padding-left: 15px;
+}
+
+.form-section h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 5px;
+    background-color: #3498db;
+    border-radius: 3px;
+}
+
+.form-section form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px 30px;
+}
+
+.form-section label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="date"],
+.form-section select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-top: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.form-section input[type="text"]:focus,
+.form-section input[type="email"]:focus,
+.form-section input[type="date"]:focus,
+.form-section select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Specific styling for the role select to align it nicely */
+.form-section label:has(select[name="role"]) {
+    grid-column: span 2; /* Make role span across two columns for better layout */
+}
+
+/* Message styling */
+.success-message {
+    background-color: #e6f7ee;
+    color: #27ae60;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    grid-column: 1 / -1; /* Span full width */
+}
+
+.error-message {
+    background-color: #fcebeb;
+    color: #e74c3c;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    grid-column: 1 / -1; /* Span full width */
+}
+
+.form-section button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 30px;
+    width: auto;
+    justify-self: center; /* Center the button in its grid cell */
+    grid-column: 1 / -1; /* Span full width */
+}
+
+.form-section button[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.form-section button[type="submit"]:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.back-button {
+    background-color: #7f8c8d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block; /* Make it a block element to center it */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-button:hover {
+    background-color: #5d6d7e;
+}
+
+/* Spinner for loading state */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-section {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-section form {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+}

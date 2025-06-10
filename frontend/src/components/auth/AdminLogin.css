@@ -1,0 +1,40 @@
+/* AdminLogin.css */
+
+/* Ensure the toast message is fixed on the screen */
+.toast-message {
+    position: fixed; /* Keeps it in place relative to the viewport */
+    top: 20px;       /* Distance from the top of the viewport */
+    left: 50%;       /* Starts at the horizontal center */
+    transform: translateX(-50%); /* Adjusts to truly center the element */
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    z-index: 1000;   /* Ensures it appears above other content */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* TEMPORARY: ADDING A BRIGHT BORDER FOR DEBUGGING */
+    border: 3px solid red !important; /* Make it very visible */
+    /* The animation makes it fade in and out */
+    animation: fadeInOut 3.5s forwards;
+    /* Ensure initial opacity is not 0 if animation is not starting */
+    opacity: 1; /* Set initial opacity to 1 for debugging, animation will control it later */
+}
+
+/* Styles for success toast messages */
+.toast-message.success {
+    background-color: #28a745; /* Green */
+}
+
+/* Styles for error toast messages */
+.toast-message.error {
+    background-color: #dc3545; /* Red */
+}
+
+/* Keyframe animation for the fade in/out effect */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Start invisible, slightly above */
+    10% { opacity: 1; transform: translateX(-50%) translateY(0); }  /* Fade in and move to final position */
+    90% { opacity: 1; transform: translateX(-50%) translateY(0); }  /* Stay visible for most of the duration */
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Fade out and move up */
+}

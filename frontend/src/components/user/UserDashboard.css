@@ -1,0 +1,235 @@
+.dashboard-container {
+    max-width: 1500px; /* Adjusted max-width for user-focused content */
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #f8f9fa; /* Light background for the overall container */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Modern shadow */
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Modern sans-serif font */
+    color: #343a40; /* Darker text for better readability */
+    line-height: 1.6;
+}
+
+.dashboard-container h2 {
+    color: #212529; /* Even darker heading */
+    font-size: 2.8em; /* Larger heading */
+    font-weight: 700; /* Bolder font */
+    text-align: center; /* Center the title */
+    margin-bottom: 10px; /* More space below heading */
+    padding-bottom: 15px;
+    justify-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e9ecef; /* Subtle border */
+}
+
+/* Message Styling (Consistent with AdminDashboard) */
+.success-message {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green */
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid #c3e6cb;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+}
+
+.error-message {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red */
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid #f5c6cb;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.1);
+}
+
+/* --- Dashboard Section Styling --- */
+.dashboard-section {
+    margin-top: 40px; /* Space between different sections */
+    padding-top: 20px;
+    border-top: 1px dashed #ced4da; /* A dashed separator for sections */
+}
+
+.dashboard-section:first-of-type {
+    border-top: none; /* No top border for the very first section */
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.dashboard-section h3 {
+    color: #212529;
+    font-size: 2em; /* Slightly smaller than main title */
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* --- List Styling (Shared for Salary and Offer Letters) --- */
+.salary-list,
+.offer-letter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- List Item Styling (Shared for Salary and Offer Letters) --- */
+.salary-slip-item,
+.offer-letter-item {
+    background-color: #ffffff; /* White background for each item */
+    border: 1px solid #e0e0e0; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 20px; /* Space between items */
+    padding: 25px; /* Generous padding */
+    display: flex;
+    flex-direction: column; /* Stack info and actions on smaller screens */
+    gap: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.salary-slip-item:hover,
+.offer-letter-item:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
+    transform: translateY(-5px); /* Stronger lift effect */
+    border-color: #cce5ff; /* Hint of blue border on hover */
+}
+
+/* --- Information Section Styling (Shared) --- */
+.salary-slip-info,
+.offer-letter-info {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive columns for info */
+    gap: 15px 25px; /* Spacing between info items */
+    align-items: center;
+}
+
+.salary-slip-info strong,
+.offer-letter-info strong {
+    font-size: 1.3em; /* Larger main text (Month, Position) */
+    color: #34495e;
+    font-weight: 700;
+    grid-column: span 2; /* Spans two columns on wider screens */
+}
+
+.salary-slip-info span,
+.offer-letter-info span {
+    font-size: 1em;
+    color: #6c757d; /* Muted grey for details */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.salary-slip-info span:not(:first-child),
+.offer-letter-info span:not(:first-child) {
+    border-left: 1px solid #e9ecef; /* Subtle divider between detail spans */
+    padding-left: 15px;
+    margin-left: -15px; /* Compensate for padding to keep alignment */
+}
+
+/* --- Actions Section Styling (Shared) --- */
+.salary-slip-actions,
+.offer-letter-actions {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    padding-top: 10px; /* Small padding top to separate from info */
+    border-top: 1px solid #f1f3f5; /* Very subtle top border */
+}
+
+.download-btn {
+    background-color: #28a745; /* Green for download action */
+    color: white;
+    padding: 12px 25px; /* Generous padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Shadow for button */
+}
+
+.download-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Empty state message */
+.dashboard-section > p { /* Target direct child paragraphs within sections for empty state */
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.2em;
+    padding: 40px;
+    border: 2px dashed #ced4da;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    margin-top: 20px; /* Slightly less margin for section-specific empty state */
+    font-style: italic;
+}
+
+/* --- Responsive Adjustments --- */
+@media (min-width: 768px) {
+    .salary-slip-item,
+    .offer-letter-item {
+        flex-direction: row; /* Row direction on larger screens */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .salary-slip-info,
+    .offer-letter-info {
+        flex-basis: 65%; /* Give info more space */
+        grid-template-columns: repeat(2, 1fr); /* Two columns for details */
+    }
+
+    .salary-slip-info strong,
+    .offer-letter-info strong {
+        grid-column: 1 / -1; /* Month/Position still spans full width of info */
+    }
+
+    .salary-slip-actions,
+    .offer-letter-actions {
+        flex-basis: 30%; /* Give actions space */
+        padding-top: 0;
+        border-top: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .dashboard-container {
+        margin: 20px;
+        padding: 25px;
+    }
+
+    .dashboard-container h2 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    .salary-slip-info strong,
+    .offer-letter-info strong {
+        grid-column: span 1; /* Reset to single column for month/position on small screens */
+    }
+
+    .salary-slip-info span:not(:first-child),
+    .offer-letter-info span:not(:first-child) {
+        border-left: none; /* Remove vertical divider on small screens */
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .salary-slip-actions,
+    .offer-letter-actions {
+        justify-content: center; /* Center button on small screens */
+    }
+
+    .download-btn {
+        width: 100%; /* Full width button on small screens */
+    }
+}
