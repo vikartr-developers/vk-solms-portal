@@ -41,7 +41,7 @@ function App() {
             <div className="App">
                 <Header /> 
                 <Routes>
-                    <Route path="/" element={<Navigate to="/login/user" replace />} /> {/* Redirect to user login by default */}
+                    <Route path="/" element={<Navigate to="/login/user" replace />} /> 
                     <Route path="/login/admin" element={<AdminLogin />} />
                     <Route path="/login/user" element={<UserLogin />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -69,7 +69,7 @@ function App() {
                         element={<PrivateRoute roles={['admin']}><EditUser /></PrivateRoute>}
                     />
                     <Route
-                        path="/admin/salary/add/:userId?" // Optional userId for creating new or pre-filling for existing
+                        path="/admin/salary/add/:userId?" 
                         element={<PrivateRoute roles={['admin']}><AdminSalaryForm /></PrivateRoute>}
                     />
 

@@ -163,7 +163,7 @@ const AdminDashboard = () => {
                 {loadingSlips ? (
                     <p>Loading salary history...</p>
                 ) : salarySlips.length === 0 ? (
-                    <p>No salary slips found in the history.</p>
+                    <p className="info-message">No salary slips found in the history.</p>
                 ) : (
                     <div className="table-responsive">
                         <table className="salary-history-table">
