@@ -1,18 +1,15 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs'); 
+const bcrypt = require('bcryptjs');
 const generateRandomPassword = require('../utils/passwordGenerator');
 const sendEmail = require('../utils/sendEmail');
 
 const generateToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.JWT_SECRET, {
-        expiresIn: '3h', 
+        expiresIn: '3h',
     });
 };
 
-// @desc    Register a new user (for admin to create regular users)
-// @route   POST /api/auth/register
-// @access  Private (Admin only)
 exports.registerUser = async (req, res) => {
     const { username, email, role, employeeDetails } = req.body;
 
@@ -30,15 +27,14 @@ exports.registerUser = async (req, res) => {
         }
 
         const generatedPlainPassword = generateRandomPassword();
-
-        const hashedPassword = await bcrypt.hash(generatedPlainPassword, 10); 
+        const hashedPassword = await bcrypt.hash(generatedPlainPassword, 10);
 
         const user = await User.create({
             username,
             email,
-            password: hashedPassword, 
-            role: role || 'user', 
-            employeeDetails: employeeDetails || {}, 
+            password: hashedPassword,
+            role: role || 'user',
+            employeeDetails: employeeDetails || {},
         });
 
         try {
@@ -96,32 +92,43 @@ exports.registerUser = async (req, res) => {
     }
 };
 
-// @desc    Auth user & get token
-// @route   POST /api/auth/login
-// @access  Public
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
-   
 
     try {
+        const adminCount = await User.countDocuments({ role: 'admin' });
+
+        if (adminCount === 0) {
+            const adminEmail = process.env.ADMIN_EMAIL || 'developers@vikartrtechnologies.com';
+            const adminPassword = process.env.ADMIN_PASSWORD || 'bhavik@1234';
+
+            let initialAdminUser = await User.findOne({ email: adminEmail });
+
+            if (!initialAdminUser) {
+                console.log('No admin user found. Creating initial admin...');
+                const hashedAdminPassword = await bcrypt.hash(adminPassword, 10);
+                initialAdminUser = await User.create({
+                    username: 'Super Admin',
+                    email: adminEmail,
+                    password: hashedAdminPassword,
+                    role: 'admin',
+                });
+                console.log('Initial admin user created successfully!');
+            }
+        }
+
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-            // console.log('Login failed: User not found for email:', email);
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-
-        // console.log('User found:', user.email);
-        
 
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
-            // console.log('Login failed: Password mismatch for user:', user.email);
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // console.log('Login successful for user:', user.email);
         res.json({
             message: 'Login successful',
             token: generateToken(user._id, user.role),
@@ -140,10 +147,6 @@ exports.loginUser = async (req, res) => {
     }
 };
 
-
-// @desc    Change user password
-// @route   PUT /api/auth/change-password
-// @access  Private (User or Admin)
 exports.changePassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
 
@@ -159,7 +162,7 @@ exports.changePassword = async (req, res) => {
             return res.status(400).json({ message: 'Old password is incorrect' });
         }
 
-        user.password = newPassword; 
+        user.password = newPassword;
         await user.save();
 
         res.json({ message: 'Password changed successfully' });
@@ -170,16 +173,13 @@ exports.changePassword = async (req, res) => {
     }
 };
 
-// @desc    Create initial admin user (run once, e.g., on server start or via dedicated route)
-// @route   GET /api/auth/create-admin (for initial setup, remove or secure after first run)
-// @access  Public (should be highly restricted in production)
 exports.createInitialAdmin = async (req, res) => {
     try {
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPassword = process.env.ADMIN_PASSWORD;
+        const adminEmail = process.env.ADMIN_EMAIL || 'developers@vikartrtechnologies.com';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'bhavik@1234';
 
         if (!adminEmail || !adminPassword) {
-            return res.status(400).json({ message: 'ADMIN_EMAIL and ADMIN_PASSWORD environment variables must be set.' });
+            return res.status(400).json({ message: 'ADMIN_EMAIL and ADMIN_PASSWORD environment variables must be set or default values will be used.' });
         }
 
         let adminUser = await User.findOne({ email: adminEmail });
@@ -193,7 +193,7 @@ exports.createInitialAdmin = async (req, res) => {
         adminUser = await User.create({
             username: 'Super Admin',
             email: adminEmail,
-            password: hashedAdminPassword, 
+            password: hashedAdminPassword,
             role: 'admin',
         });
 

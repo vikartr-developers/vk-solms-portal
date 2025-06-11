@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add a password'],
         minlength: [6, 'Password must be at least 6 characters'],
-        select: false 
+        select: false
     },
     role: {
         type: String,
@@ -30,45 +30,43 @@ const UserSchema = new mongoose.Schema({
         default: 'user'
     },
     employeeDetails: {
-        employeeName: { type: String, trim: true }, 
+        employeeName: { type: String, trim: true },
         empNo: {
             type: String,
             unique: true,
-            sparse: true 
+            sparse: true
         },
-        dateOfJoining: { type: Date }, 
-        panNo: { type: String, trim: true }, 
-        pfNo: { type: String, trim: true }, 
-        pfUanNo: { type: String, trim: true }, 
-        esicNo: { type: String, trim: true }, 
-        aadharNo: { type: String, trim: true }, 
-        gender: { type: String, enum: ['Male', 'Female', 'Other'], trim: true }, 
-        designation: { type: String, trim: true }, 
+        dateOfJoining: { type: Date },
+        panNo: { type: String, trim: true },
+        pfNo: { type: String, trim: true },
+        pfUanNo: { type: String, trim: true },
+        esicNo: { type: String, trim: true },
+        aadharNo: { type: String, trim: true },
+        gender: { type: String, enum: ['Male', 'Female', 'Other'], trim: true },
+        designation: { type: String, trim: true },
         department: { type: String, trim: true },
-        grade: { type: String, trim: true }, 
-        vertical: { type: String, trim: true }, 
+        grade: { type: String, trim: true },
+        vertical: { type: String, trim: true },
         division: { type: String, trim: true },
         location: { type: String, trim: true },
-        paymentMode: { type: String, trim: true }, 
-        bankName: { type: String, trim: true }, 
-        bankAccountNo: { type: String, trim: true }, 
+        paymentMode: { type: String, trim: true },
+        bankName: { type: String, trim: true },
+        bankAccountNo: { type: String, trim: true },
     },
     createdAt: {
         type: Date,
         default: Date.now
     }
 }, {
-    timestamps: true 
+    timestamps: true
 });
 
 UserSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
-        console.log('Password not modified, skipping hashing.');
         return next();
     }
 
     if (this.password.startsWith('$2a$') || this.password.startsWith('$2b$')) {
-        console.warn('Password already appears to be hashed. Skipping re-hashing.');
         return next();
     }
 
@@ -78,10 +76,8 @@ UserSchema.pre('save', async function(next) {
 });
 
 UserSchema.methods.matchPassword = async function(enteredPassword) {
-    
     if (!this.password || !(this.password.startsWith('$2a$') || this.password.startsWith('$2b$'))) {
-        console.error('ERROR: Stored password is NOT a valid bcrypt hash. It is:', this.password);
-        return false; 
+        return false;
     }
 
     const isMatch = await bcrypt.compare(enteredPassword, this.password);

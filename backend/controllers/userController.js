@@ -7,7 +7,6 @@ exports.getUsers = async (req, res) => {
     try {
         console.log('Fetching all users...');
         const users = await User.find().select('username email role employeeId employeeDetails');
-        // console.log(`Fetched ${users.length} use rs. Example user employeeDetails:`, users[0]?.employeeDetails);
         res.json(users);
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -26,7 +25,6 @@ exports.getUserById = async (req, res) => {
             console.log(`User with ID ${req.params.id} not found.`);
             return res.status(404).json({ message: 'User not found' });
         }
-        // console.log('User found:', user.username, 'Employee Details:', user.employeeDetails);
         res.json(user);
     } catch (error) {
         console.error(`Error fetching user by ID ${req.params.id}:`, error);
