@@ -451,7 +451,7 @@ function AdminSalaryForm() {
                     </div>
                     <div className="form-group full-width">
                         <label>Salary CTC (Annual)*</label>
-                        <input type="number" name="salaryCtc" value={formData.salaryCtc} onChange={handleChange} readOnly/>
+                        <input type="number" name="salaryCtc" value={formData.salaryCtc} onChange={handleChange}/>
                     </div>
                 </section>
 
