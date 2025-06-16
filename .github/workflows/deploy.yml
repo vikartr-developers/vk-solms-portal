@@ -19,12 +19,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 23.x
-          
-      # step 3 : Install Dependencies and build
-      # - name: Install and Build
-      #   run: |
-      #     npm install
-      #     CI=false npm run build
 
       # Step 3: Install sshpass
       - name: Install sshpass
@@ -82,7 +76,25 @@ jobs:
           echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" >> .env
           EOF
 
-      # Step 7: Restart PM2 on Server
+      # step 7: Install Dependencies and build
+      - name: Set up Environment Variables for Build
+        run: |
+          echo "REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > ./frontend/.env
+
+      - name: Install and Build
+        run: |
+          cd ./frontend
+          npm install
+          CI=false npm run build
+
+      - name: Deploy Front
+        env:
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -p "$SERVER_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -vvv" ./frontend/build root@64.227.173.10:/var/www/html/salary-slip/frontend/
+
+
+      # Step 8: Restart PM2 on Server
       - name: Restart PM2
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
