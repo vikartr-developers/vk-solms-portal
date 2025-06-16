@@ -98,7 +98,7 @@ jobs:
           node -v
           npm install --force
           echo "Npm Installed successfully."
-          npm run build
+          # npm run build
           PORT=9005 pm2 restart node-salary-slip || PORT=9005 pm2 start npm --name "node-salary-slip" -- run start
           pm2 save
           EOF
