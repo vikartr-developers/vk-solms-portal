@@ -54,7 +54,7 @@ jobs:
       - name: Configure Environment Variables
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          # PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.PORT }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
@@ -64,11 +64,12 @@ jobs:
           SMTP_SERVER_USERNAME: ${{ secrets.SMTP_SERVER_USERNAME }}
           SMTP_SERVER_PASSWORD: ${{ secrets.SMTP_SERVER_PASSWORD }}
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+          REACT_APP_BACKEND_URL: $ {{ secrets.REACT_APP_BACKEND_URL }}
 
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no root@64.227.173.10 <<EOF
           cd /var/www/html/salary-slip/
-          # echo "PORT=${PORT}" >> .env
+          echo "PORT=${PORT}" >> .env
           echo "MONGO_PASSWORD=${MONGO_PASSWORD}" >> .env
           echo "MONGO_URI=${MONGO_URI}" >> .env
           echo "JWT_SECRET=${JWT_SECRET}" >> .env
@@ -78,6 +79,7 @@ jobs:
           echo "SMTP_SERVER_USERNAME=${SMTP_SERVER_USERNAME}" >> .env
           echo "SMTP_SERVER_PASSWORD=${SMTP_SERVER_PASSWORD}" >> .env
           echo "FROM_EMAIL=${FROM_EMAIL}" >> .env
+          echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" >> .env
           EOF
 
       # Step 7: Restart PM2 on Server
