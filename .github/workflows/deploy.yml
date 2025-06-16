@@ -91,7 +91,7 @@ jobs:
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -p "$SERVER_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -vvv" ./frontend/build root@64.227.173.10:/var/www/html/salary-slip/frontend/
+          sshpass -p "$SERVER_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -vvv" ./frontend/build/ root@64.227.173.10:/var/www/html/salary-slip/frontend/
 
 
       # Step 8: Restart PM2 on Server
@@ -108,6 +108,7 @@ jobs:
           curl -fsSL https://deb.nodesource.com/setup_23.x | bash -
           apt-get install -y nodejs
           node -v
+          cp .env /var/www/html/salary-slip/backend/
           cd /var/www/html/salary-slip/backend
           npm install --force
           echo "Npm Installed successfully."
