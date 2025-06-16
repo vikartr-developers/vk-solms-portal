@@ -88,7 +88,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no root@64.227.173.10 <<EOF
-          cd /var/www/html/salary-slip/
+          cd /var/www/html/salary-slip
           # Install PM2 globally
           npm install -g pm2
           pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip|| echo "PM2 process 'node-salary-slip' not found. Skipping stop."
