@@ -1,15 +1,15 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
-
 require('dotenv').config();
 
 const smtpHost = process.env.SMTP_SERVER_HOST;
 const smtpUser = process.env.SMTP_SERVER_USERNAME;
 const smtpPass = process.env.SMTP_SERVER_PASSWORD;
 const fromEmail = process.env.FROM_MAIL;
+const frontendBaseUrl = process.env.FRONTEND_URL;
 
-router.post('/', async (req, res) => {
+router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
@@ -27,22 +27,24 @@ router.post('/', async (req, res) => {
             },
         });
 
-        const resetLink = `http://localhost:3000/reset-password?email=${encodeURIComponent(email)}`;
+        const resetLink = `${frontendBaseUrl}/reset-password?email=${encodeURIComponent(email)}`;
 
         await transporter.sendMail({
             from: fromEmail,
             to: email,
-            subject: 'Password Reset',
+            subject: 'Password Reset Request',
             html: `
-                <p>You requested a password reset.</p>
-                <p><a href="${resetLink}">Click here to reset your password</a></p>
+                <h3>Password Reset</h3>
+                <p>You requested a password reset. Click the link below:</p>
+                <a href="${resetLink}">${resetLink}</a>
+                <p>If you didn’t request this, please ignore this email.</p>
             `,
         });
 
-        res.json({ message: 'Password reset email sent!' });
+        return res.json({ message: 'Password reset email sent!' });
     } catch (error) {
         console.error('Email send failed:', error);
-        res.status(500).json({ message: 'Error sending email' });
+        return res.status(500).json({ message: 'Error sending email' });
     }
 });
 
