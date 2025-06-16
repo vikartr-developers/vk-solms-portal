@@ -108,6 +108,7 @@ jobs:
           curl -fsSL https://deb.nodesource.com/setup_23.x | bash -
           apt-get install -y nodejs
           node -v
+          cd /var/www/html/salary-slip/backend
           npm install --force
           echo "Npm Installed successfully."
           # npm run build
