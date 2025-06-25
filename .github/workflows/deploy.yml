@@ -56,7 +56,7 @@ jobs:
           SMTP_SERVER_HOST: ${{ secrets.SMTP_SERVER_HOST }}
           SMTP_SERVER_USERNAME: ${{ secrets.SMTP_SERVER_USERNAME }}
           SMTP_SERVER_PASSWORD: ${{ secrets.SMTP_SERVER_PASSWORD }}
-          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+          FROM_MAIL: ${{ secrets.FROM_MAIL }}
           REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
 
         run: |
@@ -71,7 +71,7 @@ jobs:
           echo "SMTP_SERVER_HOST=${SMTP_SERVER_HOST}" >> .env
           echo "SMTP_SERVER_USERNAME=${SMTP_SERVER_USERNAME}" >> .env
           echo "SMTP_SERVER_PASSWORD=${SMTP_SERVER_PASSWORD}" >> .env
-          echo "FROM_EMAIL=${FROM_EMAIL}" >> .env
+          echo "FROM_MAIL=${FROM_MAIL}" >> .env
           echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" >> .env
           EOF
 
