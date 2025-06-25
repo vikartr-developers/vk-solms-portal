@@ -36,13 +36,12 @@ jobs:
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
 
-       # Step 5: Deploy Node.js App to Server
+        # Step 5: Deploy Node.js App to Server
       - name: Deploy Node.js App
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -p "$SERVER_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -vvv" . root@64.227.173.10:/var/www/html/salary-slip/
-
 
       # Step 6: Set Environment Variables
       - name: Configure Environment Variables
@@ -92,7 +91,6 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -p "$SERVER_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -vvv" ./frontend/build/ root@64.227.173.10:/var/www/html/salary-slip/frontend/
-
 
       # Step 8: Restart PM2 on Server
       - name: Restart PM2

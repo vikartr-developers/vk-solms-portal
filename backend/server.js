@@ -13,10 +13,12 @@ const resetPasswordRoute = require('./routes/resetPassword');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGO_URI.replace(
-    "<db_password>", 
-    process.env.MONGO_PASSWORD
-);
+// const MONGODB_URI = process.env.MONGO_URI.replace(
+//     "<db_password>", 
+//     process.env.MONGO_PASSWORD
+// );
+
+const MONGODB_URI = process.env.MONGO_URI;
 
 
 // Middleware
