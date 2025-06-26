@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 23.x
+          node-version: 20.5.0
 
       # Step 3: Install sshpass
       - name: Install sshpass
