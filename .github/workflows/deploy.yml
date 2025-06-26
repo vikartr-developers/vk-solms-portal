@@ -106,6 +106,7 @@ jobs:
           node -v
           curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
           apt-get install -y nodejs
+          node -v
           cp .env /var/www/html/salary-slip/backend/
           cd /var/www/html/salary-slip/backend
           npm install --force
