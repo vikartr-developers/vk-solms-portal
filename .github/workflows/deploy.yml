@@ -105,7 +105,11 @@ jobs:
           npm install -g pm2
           pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip|| echo "PM2 process 'node-salary-slip' not found. Skipping stop."
           rm -rf node_modules package-lock.json
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+          fi
+          source "$NVM_DIR/nvm.sh"
           nvm install 20.5.0
           nvm use 20.5.0
           nvm alias default 20.5.0
