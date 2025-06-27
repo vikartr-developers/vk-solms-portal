@@ -106,7 +106,8 @@ jobs:
           npm install -g pm2
           pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip || echo "PM2 process 'node-salary-slip' not found. Skipping stop."
           rm -rf node_modules package-lock.json
-          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          sudo apt remove nodejs -y
+          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt-get install -y nodejs
           node -v
           cp .env /var/www/html/salary-slip/backend/
