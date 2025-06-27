@@ -102,9 +102,11 @@ jobs:
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no root@64.227.173.10 <<EOF
           cd /var/www/html/salary-slip
-          sudo apt remove nodejs -y
-          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-          sudo apt-get install -y nodejs
+          sudo apt remove -y nodejs
+          sudo apt-get update
+          sudo apt-get install -y curl build-essential npm
+          sudo npm install -g n
+          sudo n 20.5.0
           node -v
           # Install PM2 globally
           npm install -g pm2
