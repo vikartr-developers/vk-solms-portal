@@ -6,8 +6,13 @@ const salaryRoutes = require('./src/routes/salaryRoutes');
 const app = express();
 
 // Middleware
-app.use(cors()); 
-app.use(bodyParser.json()); 
+app.use(cors({
+    origin: 'http://64.227.173.10:9006',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+app.use(bodyParser.json());
 
 // Routes
 app.use('/api', salaryRoutes); // All salary-related routes will be prefixed with /api
