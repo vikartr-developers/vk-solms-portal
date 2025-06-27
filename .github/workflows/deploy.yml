@@ -102,14 +102,14 @@ jobs:
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no root@64.227.173.10 <<EOF
           cd /var/www/html/salary-slip
-          # Install PM2 globally
-          npm install -g pm2
-          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip || echo "PM2 process 'node-salary-slip' not found. Skipping stop."
-          rm -rf node_modules package-lock.json
           sudo apt remove nodejs -y
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt-get install -y nodejs
           node -v
+          # Install PM2 globally
+          npm install -g pm2
+          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip || echo "PM2 process 'node-salary-slip' not found. Skipping stop."
+          rm -rf node_modules package-lock.json
           cp .env /var/www/html/salary-slip/backend/
           cd /var/www/html/salary-slip/backend
           npm install --force
