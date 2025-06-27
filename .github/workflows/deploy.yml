@@ -17,8 +17,11 @@ jobs:
       # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: 23.x
+        with: 
+          node-version: 20.5.0
+          
+      - name: Check Node.js Version
+        run: node -v
 
       # Step 3: Install sshpass
       - name: Install sshpass
@@ -99,13 +102,15 @@ jobs:
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no root@64.227.173.10 <<EOF
           cd /var/www/html/salary-slip
+          sudo apt remove -y nodejs
+          curl -O https://nodejs.org/dist/v20.5.0/node-v20.5.0-linux-x64.tar.xz
+          sudo tar -C /usr/local --strip-components=1 -xJf node-v20.5.0-linux-x64.tar.xz
+          node -v
+          npm -v
           # Install PM2 globally
           npm install -g pm2
-          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip|| echo "PM2 process 'node-salary-slip' not found. Skipping stop."
+          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip || echo "PM2 process 'node-salary-slip' not found. Skipping stop."
           rm -rf node_modules package-lock.json
-          curl -fsSL https://deb.nodesource.com/setup_23.x | bash -
-          apt-get install -y nodejs
-          node -v
           cp .env /var/www/html/salary-slip/backend/
           cd /var/www/html/salary-slip/backend
           npm install --force
