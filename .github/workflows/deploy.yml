@@ -15,12 +15,13 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Setup Node.js
-      - name: Check Node.js Version
-        run: node -v
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with: 
           node-version: 20.5.0
+          
+      - name: Check Node.js Version
+        run: node -v
 
       # Step 3: Install sshpass
       - name: Install sshpass
@@ -103,16 +104,10 @@ jobs:
           cd /var/www/html/salary-slip
           # Install PM2 globally
           npm install -g pm2
-          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip|| echo "PM2 process 'node-salary-slip' not found. Skipping stop."
+          pm2 list | grep -q "node-salary-slip" && pm2 stop node-salary-slip || echo "PM2 process 'node-salary-slip' not found. Skipping stop."
           rm -rf node_modules package-lock.json
-          export NVM_DIR="$HOME/.nvm"
-          if [ ! -s "$NVM_DIR/nvm.sh" ]; then
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-          fi
-          source "$NVM_DIR/nvm.sh"
-          nvm install 20.5.0
-          nvm use 20.5.0
-          nvm alias default 20.5.0
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          sudo apt-get install -y nodejs
           node -v
           cp .env /var/www/html/salary-slip/backend/
           cd /var/www/html/salary-slip/backend
