@@ -16,46 +16,47 @@ const UserDashboard = () => {
     const [downloadingOfferLetterId, setDownloadingOfferLetterId] = useState(null);
 
     useEffect(() => {
+        const fetchSalarySlips = async () => {
+            setLoadingSlips(true);
+            try {
+                const response = await api.get(`/salary/user/${user.id}`);
+                setSalarySlips(response.data);
+            } catch (err) {
+                console.error('Error fetching salary slips:', err.response?.data?.message || err.message);
+                toast.error('Failed to fetch your salary slips.');
+            } finally {
+                setLoadingSlips(false);
+            }
+        };
+
+        const fetchUserOfferLetters = async () => {
+            setLoadingOfferLetters(true);
+            try {
+                const response = await api.get(`/offerletters/user/${user.id}`);
+                setUserOfferLetters(response.data ? [response.data] : []);
+            } catch (err) {
+                console.error('Error fetching offer letters:', err.response?.data?.msg || err.message);
+                if (err.response && err.response.status === 404) {
+                    setUserOfferLetters([]);
+                    toast.info('No offer letter found for your account.');
+                } else {
+                    toast.error('Failed to fetch your offer letters.');
+                }
+            } finally {
+                setLoadingOfferLetters(false);
+            }
+        };
+
         if (user) {
             fetchSalarySlips();
             fetchUserOfferLetters();
         }
     }, [user]);
 
-    const fetchSalarySlips = async () => {
-        setLoadingSlips(true);
-        try {
-            const response = await api.get(`/salary/user/${user.id}`);
-            setSalarySlips(response.data);
-        } catch (err) {
-            console.error('Error fetching salary slips:', err.response?.data?.message || err.message);
-            toast.error('Failed to fetch your salary slips.'); 
-        } finally {
-            setLoadingSlips(false);
-        }
-    };
-
-    const fetchUserOfferLetters = async () => {
-        setLoadingOfferLetters(true);
-        try {
-            const response = await api.get(`/offerletters/user/${user.id}`);
-            setUserOfferLetters(response.data ? [response.data] : []);
-        } catch (err) {
-            console.error('Error fetching offer letters:', err.response?.data?.msg || err.message);
-            if (err.response && err.response.status === 404) {
-                setUserOfferLetters([]); 
-                toast.info('No offer letter found for your account.'); 
-            } else {
-                toast.error('Failed to fetch your offer letters.'); 
-            }
-        } finally {
-            setLoadingOfferLetters(false);
-        }
-    };
 
     const handleDownloadSlip = async (salaryId, employeeName, month) => {
-       
-        setDownloadingSalarySlipId(salaryId); 
+
+        setDownloadingSalarySlipId(salaryId);
         try {
             const response = await api.get(`/salary/download/${salaryId}`, { responseType: 'blob' });
             const file = new Blob([response.data], { type: 'application/pdf' });
@@ -67,35 +68,35 @@ const UserDashboard = () => {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(fileURL);
-            toast.success('Salary slip downloaded successfully!'); 
+            toast.success('Salary slip downloaded successfully!');
         } catch (err) {
             console.error('Error downloading salary slip:', err.response?.data?.message || err.message);
             toast.error(err.response?.data?.message || 'Failed to download salary slip.');
         } finally {
-            setDownloadingSalarySlipId(null); 
+            setDownloadingSalarySlipId(null);
         }
     };
 
     const handleDownloadOfferLetter = async (letterId, candidateName, offerDate) => {
-        setDownloadingOfferLetterId(letterId); 
+        setDownloadingOfferLetterId(letterId);
         try {
             const response = await api.get(`/offerletters/download/${letterId}`, { responseType: 'blob' });
             const file = new Blob([response.data], { type: 'application/pdf' });
             const fileURL = URL.createObjectURL(file);
             const link = document.createElement('a');
             link.href = fileURL;
-            const formattedOfferDate = new Date(offerDate).toLocaleDateString('en-CA'); 
+            const formattedOfferDate = new Date(offerDate).toLocaleDateString('en-CA');
             link.download = `${candidateName.replace(/\s/g, '_')}_OfferLetter_${formattedOfferDate}.pdf`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(fileURL);
-            toast.success('Offer letter downloaded successfully!'); 
+            toast.success('Offer letter downloaded successfully!');
         } catch (err) {
             console.error('Error downloading offer letter:', err.response?.data?.msg || err.message);
             toast.error(err.response?.data?.msg || 'Failed to download offer letter.');
         } finally {
-            setDownloadingOfferLetterId(null); 
+            setDownloadingOfferLetterId(null);
         }
     };
 
@@ -124,10 +125,10 @@ const UserDashboard = () => {
                                     <button
                                         onClick={() => handleDownloadSlip(slip._id, slip.employeeName, slip.month)}
                                         className="download-btn"
-                                        disabled={downloadingSalarySlipId === slip._id} 
+                                        disabled={downloadingSalarySlipId === slip._id}
                                     >
                                         {downloadingSalarySlipId === slip._id ? (
-                                            <span className="spinner"></span> 
+                                            <span className="spinner"></span>
                                         ) : (
                                             'Download PDF'
                                         )}
@@ -156,10 +157,10 @@ const UserDashboard = () => {
                                     <button
                                         onClick={() => handleDownloadOfferLetter(letter._id, letter.candidateName, letter.offerDate)}
                                         className="download-btn"
-                                        disabled={downloadingOfferLetterId === letter._id} 
+                                        disabled={downloadingOfferLetterId === letter._id}
                                     >
                                         {downloadingOfferLetterId === letter._id ? (
-                                            <span className="spinner"></span> 
+                                            <span className="spinner"></span>
                                         ) : (
                                             'Download PDF'
                                         )}

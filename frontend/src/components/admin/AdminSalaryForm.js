@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../lib/api';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,7 +9,7 @@ function AdminSalaryForm() {
     const { userId } = useParams();
     const navigate = useNavigate();
 
-    const initialFormData = {
+    const initialFormData = useMemo(() => ({
         companyName: 'VIKARTR TECHNOLOGIES',
         employeeName: '',
         empNo: '',
@@ -57,7 +57,7 @@ function AdminSalaryForm() {
             leave: 0,
         },
         salaryCtc: 0,
-    };
+    }), []);
 
     const [formData, setFormData] = useState(initialFormData);
     const [selectedMonth, setSelectedMonth] = useState(new Date().toLocaleString('en-US', { month: 'long' }));
@@ -85,7 +85,7 @@ function AdminSalaryForm() {
 
     useEffect(() => {
         calculateSalary();
-    }, [calculateSalary]);
+    }, [calculateSalary,initialFormData]);
 
     useEffect(() => {
         const fetchUserDataAndSalary = async () => {
@@ -202,7 +202,7 @@ function AdminSalaryForm() {
         };
 
         fetchUserDataAndSalary();
-    }, [userId, selectedMonth, selectedYear, navigate]);
+    }, [userId, selectedMonth, selectedYear, navigate,initialFormData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
